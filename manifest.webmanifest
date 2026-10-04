@@ -1,0 +1,16 @@
+{
+  "name": "Panel — food & macro log",
+  "short_name": "Panel",
+  "description": "A private calorie and macro tracker. Barcode, photo, search or manual.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#E9EBE5",
+  "theme_color": "#E9EBE5",
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "note": "Ingredients and meals from the 3-week plan. Loaded into your own editable list — change anything after loading.",
+
+  "foods": [
+    {"n":"Egg, whole (plan)","g":"Plan","k":144,"pr":12.6,"cb":0.8,"ft":9.6,"u":[{"l":"1 large egg","g":50}]},
+    {"n":"Egg white (plan)","g":"Plan","k":52,"pr":10.9,"cb":0.6,"ft":0,"u":[{"l":"1 white","g":33}]},
+    {"n":"Wholewheat bread, my loaf","g":"Plan","k":243,"pr":11.4,"cb":40,"ft":2.9,"u":[{"l":"1 slice","g":35}]},
+    {"n":"Mixed seeds","g":"Plan","k":550,"pr":20,"cb":20,"ft":45,"u":[{"l":"1 tbsp","g":10}]},
+    {"n":"Cooking oil / ghee / butter","g":"Plan","k":900,"pr":0,"cb":0,"ft":100,"u":[{"l":"1 tsp","g":5},{"l":"1 tbsp","g":15}]},
+
+    {"n":"Herbalife shake, full","g":"Plan","k":380,"pr":48,"cb":29,"ft":8,"basis":"portion"},
+    {"n":"Herbalife Formula 1","g":"Plan","k":376,"pr":36,"cb":42,"ft":7.2,"u":[{"l":"1 scoop","g":8.3}]},
+    {"n":"Herbalife ShakeMate","g":"Plan","k":393,"pr":39.8,"cb":50,"ft":3.7,"u":[{"l":"1 scoop","g":13.5}]},
+    {"n":"Herbalife Personalized Protein","g":"Plan","k":383,"pr":83.3,"cb":3.3,"ft":3.3,"u":[{"l":"1 scoop","g":6}]},
+    {"n":"Whey protein, my tub","g":"Plan","k":400,"pr":73.3,"cb":10,"ft":6.7,"u":[{"l":"1 scoop","g":30}]},
+    {"n":"Flaxseed, ground","g":"Plan","k":370,"pr":13,"cb":20,"ft":30,"u":[{"l":"1 tbsp","g":10}]},
+    {"n":"Isabgol (psyllium husk)","g":"Plan","k":36,"pr":1.5,"cb":7,"ft":0.3,"u":[{"l":"1 tsp","g":5}]},
+
+    {"n":"Chicken breast, raw (weigh raw)","g":"Plan","k":120,"pr":22.5,"cb":0,"ft":2.6,"u":[{"l":"200 g raw","g":200},{"l":"150 g raw","g":150},{"l":"100 g raw","g":100}]},
+    {"n":"Chicken tenders, frozen","g":"Plan","k":178,"pr":20,"cb":10,"ft":6.5,"u":[{"l":"100 g","g":100}]},
+
+    {"n":"Skyr 0% (plan)","g":"Plan","k":63,"pr":11,"cb":4,"ft":0.2,"u":[{"l":"150 g pot","g":150},{"l":"250 g","g":250}]},
+    {"n":"Cottage cheese (plan)","g":"Plan","k":98,"pr":11,"cb":3.4,"ft":4.3,"u":[{"l":"80 g","g":80},{"l":"40 g","g":40}]},
+    {"n":"Cheese slice","g":"Plan","k":300,"pr":18,"cb":5,"ft":24,"u":[{"l":"1 slice","g":20}]},
+    {"n":"Kiri portion","g":"Plan","k":290,"pr":6,"cb":4,"ft":28,"u":[{"l":"1 portion","g":17.5}]},
+    {"n":"Boursin, individual portion","g":"Plan","k":410,"pr":5,"cb":3,"ft":41,"u":[{"l":"1 portion","g":16}]},
+    {"n":"Babybel Light","g":"Plan","k":250,"pr":30,"cb":0,"ft":13.5,"u":[{"l":"1 piece","g":20}]},
+    {"n":"Krisprolls","g":"Plan","k":400,"pr":10,"cb":70,"ft":8,"u":[{"l":"1 roll","g":10}]},
+
+    {"n":"Quinoa, dry","g":"Plan","k":368,"pr":14,"cb":64,"ft":6,"u":[{"l":"60 g dry","g":60}]},
+    {"n":"Rice, dry","g":"Plan","k":360,"pr":7,"cb":79,"ft":0.6,"u":[{"l":"40 g dry","g":40},{"l":"25 g dry","g":25}]},
+    {"n":"Dal, dry","g":"Plan","k":343,"pr":24,"cb":60,"ft":1.5,"u":[{"l":"50 g dry","g":50}]},
+    {"n":"Besan (gram flour)","g":"Plan","k":387,"pr":22,"cb":58,"ft":6,"u":[{"l":"1 tbsp","g":10}]},
+
+    {"n":"Frozen mixed veg","g":"Plan","k":47,"pr":3,"cb":7,"ft":0.5,"u":[{"l":"150 g","g":150}]},
+    {"n":"Chickpeas, canned drained","g":"Plan","k":119,"pr":7.3,"cb":17,"ft":2.1,"u":[{"l":"150 g","g":150}]},
+    {"n":"Salad veg (cucumber, tomato, onion)","g":"Plan","k":20,"pr":1,"cb":4,"ft":0.2,"u":[{"l":"1 bowl","g":150}]},
+    {"n":"Clementine","g":"Plan","k":47,"pr":0.9,"cb":12,"ft":0.2,"u":[{"l":"1 clementine","g":75}]},
+    {"n":"Mixed berries, frozen","g":"Plan","k":50,"pr":1,"cb":10,"ft":0.3,"u":[{"l":"80 g","g":80}]},
+
+    {"n":"Roasted chana","g":"Plan","k":367,"pr":20,"cb":60,"ft":5,"u":[{"l":"30 g handful","g":30}]},
+    {"n":"Almonds (plan)","g":"Plan","k":579,"pr":21,"cb":22,"ft":50,"u":[{"l":"20 g","g":20}]},
+    {"n":"Peanuts (plan)","g":"Plan","k":567,"pr":26,"cb":16,"ft":49,"u":[{"l":"20 g","g":20}]},
+    {"n":"Hummus, homemade","g":"Plan","k":166,"pr":7.9,"cb":14,"ft":9.6,"u":[{"l":"50 g","g":50}]},
+    {"n":"Makhana","g":"Plan","k":350,"pr":9.7,"cb":77,"ft":0.1,"u":[{"l":"25 g","g":25}]},
+    {"n":"Popcorn kernels","g":"Plan","k":375,"pr":11,"cb":75,"ft":4,"u":[{"l":"20 g kernels","g":20}]},
+    {"n":"Dark chocolate 85%","g":"Plan","k":600,"pr":10,"cb":22,"ft":50,"u":[{"l":"1 square","g":10}]},
+    {"n":"Soya chunks, dry (plan)","g":"Plan","k":345,"pr":52,"cb":33,"ft":0.5,"u":[{"l":"30 g dry","g":30}]},
+    {"n":"Tofu, firm (plan)","g":"Plan","k":144,"pr":17,"cb":3,"ft":9,"u":[{"l":"150 g","g":150}]}
+  ],
+
+  "meals": [
+    {"name":"Breakfast — eggs","items":[
+      {"f":"Egg, whole (plan)","amt":1,"unit":"1 large egg"},
+      {"f":"Egg white (plan)","amt":4,"unit":"1 white"},
+      {"f":"Wholewheat bread, my loaf","amt":1,"unit":"1 slice"},
+      {"f":"Mixed seeds","amt":1,"unit":"1 tbsp"},
+      {"f":"Cooking oil / ghee / butter","amt":1,"unit":"1 tsp"}
+    ]},
+    {"name":"Breakfast — training day","items":[
+      {"f":"Egg, whole (plan)","amt":2,"unit":"1 large egg"},
+      {"f":"Egg white (plan)","amt":3,"unit":"1 white"},
+      {"f":"Wholewheat bread, my loaf","amt":2,"unit":"1 slice"},
+      {"f":"Mixed seeds","amt":1,"unit":"1 tbsp"},
+      {"f":"Cooking oil / ghee / butter","amt":1,"unit":"1 tsp"},
+      {"f":"Salad veg (cucumber, tomato, onion)","amt":1,"unit":"1 bowl"}
+    ]},
+    {"name":"Breakfast — skyr bowl (Tue)","items":[
+      {"f":"Skyr 0% (plan)","amt":1,"unit":"250 g"},
+      {"f":"Mixed seeds","amt":1,"unit":"1 tbsp"},
+      {"f":"Wholewheat bread, my loaf","amt":1,"unit":"1 slice"},
+      {"f":"Cottage cheese (plan)","amt":50,"unit":"g"}
+    ]},
+    {"name":"Shake (Herbalife + whey)","items":[
+      {"f":"Herbalife shake, full","amt":1,"unit":"portion"}
+    ]},
+    {"name":"Shake, built from scoops","items":[
+      {"f":"Herbalife Formula 1","amt":3,"unit":"1 scoop"},
+      {"f":"Herbalife ShakeMate","amt":2,"unit":"1 scoop"},
+      {"f":"Herbalife Personalized Protein","amt":1,"unit":"1 scoop"},
+      {"f":"Whey protein, my tub","amt":1,"unit":"1 scoop"},
+      {"f":"Flaxseed, ground","amt":1,"unit":"1 tbsp"}
+    ]},
+
+    {"name":"Dinner — chicken quinoa bowl","items":[
+      {"f":"Chicken breast, raw (weigh raw)","amt":1,"unit":"200 g raw"},
+      {"f":"Quinoa, dry","amt":1,"unit":"60 g dry"},
+      {"f":"Frozen mixed veg","amt":1,"unit":"150 g"},
+      {"f":"Cooking oil / ghee / butter","amt":2,"unit":"1 tsp"}
+    ]},
+    {"name":"Dinner — dahi tadka sandwich","items":[
+      {"f":"Skyr 0% (plan)","amt":1,"unit":"150 g pot"},
+      {"f":"Cottage cheese (plan)","amt":1,"unit":"80 g"},
+      {"f":"Cheese slice","amt":1,"unit":"1 slice"},
+      {"f":"Wholewheat bread, my loaf","amt":2,"unit":"1 slice"},
+      {"f":"Besan (gram flour)","amt":2,"unit":"1 tbsp"},
+      {"f":"Cooking oil / ghee / butter","amt":1,"unit":"1 tsp"},
+      {"f":"Chicken breast, raw (weigh raw)","amt":1,"unit":"100 g raw"}
+    ]},
+    {"name":"Dinner — chicken chickpea chaat","items":[
+      {"f":"Chicken breast, raw (weigh raw)","amt":1,"unit":"200 g raw"},
+      {"f":"Chickpeas, canned drained","amt":1,"unit":"150 g"},
+      {"f":"Salad veg (cucumber, tomato, onion)","amt":1,"unit":"1 bowl"},
+      {"f":"Cooking oil / ghee / butter","amt":1,"unit":"1 tsp"}
+    ]},
+    {"name":"Dinner — dal, rice & chicken","items":[
+      {"f":"Dal, dry","amt":1,"unit":"50 g dry"},
+      {"f":"Rice, dry","amt":1,"unit":"40 g dry"},
+      {"f":"Chicken breast, raw (weigh raw)","amt":1,"unit":"150 g raw"},
+      {"f":"Cooking oil / ghee / butter","amt":1,"unit":"1 tsp"},
+      {"f":"Salad veg (cucumber, tomato, onion)","amt":1,"unit":"1 bowl"}
+    ]},
+    {"name":"Dinner — tenders backup","items":[
+      {"f":"Chicken tenders, frozen","amt":1.5,"unit":"100 g"},
+      {"f":"Wholewheat bread, my loaf","amt":2,"unit":"1 slice"},
+      {"f":"Salad veg (cucumber, tomato, onion)","amt":1,"unit":"1 bowl"}
+    ]},
+
+    {"name":"Snack — clementines + almonds","items":[
+      {"f":"Clementine","amt":2,"unit":"1 clementine"},
+      {"f":"Almonds (plan)","amt":1,"unit":"20 g"}
+    ]},
+    {"name":"Snack — skyr + berries","items":[
+      {"f":"Skyr 0% (plan)","amt":1,"unit":"150 g pot"},
+      {"f":"Mixed berries, frozen","amt":1,"unit":"80 g"}
+    ]},
+    {"name":"Snack — roasted chana","items":[
+      {"f":"Roasted chana","amt":1,"unit":"30 g handful"}
+    ]},
+    {"name":"Snack — veg sticks + hummus","items":[
+      {"f":"Salad veg (cucumber, tomato, onion)","amt":1,"unit":"1 bowl"},
+      {"f":"Hummus, homemade","amt":1,"unit":"50 g"}
+    ]},
+    {"name":"Snack — Krisprolls + Kiri","items":[
+      {"f":"Krisprolls","amt":2,"unit":"1 roll"},
+      {"f":"Kiri portion","amt":1,"unit":"1 portion"}
+    ]},
+    {"name":"Snack — peanuts","items":[
+      {"f":"Peanuts (plan)","amt":1,"unit":"20 g"}
+    ]}
+  ]
+}

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Panel — food &amp; macro log</title>
+<meta name="theme-color" content="#E9EBE5">
+<meta name="description" content="A private calorie and macro tracker. Barcode, photo, search or manual.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<!-- ══════════════════ ONBOARDING ══════════════════ -->
+<div id="setup" class="setup hidden">
+  <div class="setup-inner">
+    <p class="eyebrow">Set up</p>
+    <h1 class="wordmark">Panel</h1>
+    <p class="lede">Four numbers a day. Tell me about you and I'll work out what they should be.</p>
+
+    <div class="field-grid">
+      <label class="field"><span>Name</span><input id="s-name" type="text" placeholder="Optional" autocomplete="given-name"></label>
+      <label class="field"><span>Age</span><input id="s-age" type="number" inputmode="numeric" min="14" max="99" placeholder="30"></label>
+      <label class="field"><span>Height (cm)</span><input id="s-height" type="number" inputmode="decimal" min="120" max="230" placeholder="165"></label>
+      <label class="field"><span>Weight (kg)</span><input id="s-weight" type="number" inputmode="decimal" min="30" max="250" step="0.1" placeholder="60"></label>
+    </div>
+
+    <p class="field-label">Sex <em>(for the metabolic formula)</em></p>
+    <div class="seg" id="s-sex">
+      <button type="button" data-v="f" class="on">Female</button>
+      <button type="button" data-v="m">Male</button>
+    </div>
+
+    <p class="field-label">Activity</p>
+    <div class="stack" id="s-activity">
+      <button type="button" data-v="1.2">Desk job, little exercise</button>
+      <button type="button" data-v="1.375" class="on">Light — 1–3 sessions a week</button>
+      <button type="button" data-v="1.55">Moderate — 3–5 sessions</button>
+      <button type="button" data-v="1.725">Hard — 6–7 sessions</button>
+      <button type="button" data-v="1.9">Athlete or physical job</button>
+    </div>
+
+    <p class="field-label">Goal</p>
+    <div class="stack" id="s-goal">
+      <button type="button" data-v="-500">Lose fat — steady</button>
+      <button type="button" data-v="-250" class="on">Lose fat — gentle</button>
+      <button type="button" data-v="0">Maintain</button>
+      <button type="button" data-v="250">Build — lean gain</button>
+    </div>
+
+    <button id="s-go" class="primary big">Work out my numbers</button>
+    <p class="fine">Everything stays on this device. Nothing is sent anywhere unless you turn on photo scanning.</p>
+  </div>
+</div>
+
+<!-- ══════════════════ APP ══════════════════ -->
+<div id="app" class="app hidden">
+
+  <!-- ─── TODAY ─── -->
+  <section id="view-today" class="view">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow" id="today-eyebrow">Today</p>
+        <h2 class="date-title" id="today-date">—</h2>
+      </div>
+      <div class="daynav">
+        <button id="day-prev" aria-label="Previous day">‹</button>
+        <button id="day-next" aria-label="Next day">›</button>
+      </div>
+    </header>
+
+    <!-- signature: live nutrition panel -->
+    <div class="panel">
+      <p class="panel-kicker">Nutrition Facts</p>
+      <p class="panel-sub" id="panel-sub">1 day</p>
+      <div class="rule-8"></div>
+      <div class="cal-row">
+        <div>
+          <p class="cal-label">Calories</p>
+          <p class="cal-sub" id="cal-sub">of 0 target</p>
+        </div>
+        <p class="cal-num" id="cal-num">0</p>
+      </div>
+      <div class="meter"><i id="cal-meter" style="width:0%"></i></div>
+      <div class="rule-4"></div>
+
+      <div class="macro-row" data-m="p">
+        <p class="m-name">Protein <span class="m-unit" id="m-p-target">0 g</span></p>
+        <p class="m-val" id="m-p">0 g</p>
+        <div class="m-bar"><i id="m-p-bar" style="width:0%"></i></div>
+      </div>
+      <div class="macro-row" data-m="c">
+        <p class="m-name">Carbohydrate <span class="m-unit" id="m-c-target">0 g</span></p>
+        <p class="m-val" id="m-c">0 g</p>
+        <div class="m-bar"><i id="m-c-bar" style="width:0%"></i></div>
+      </div>
+      <div class="macro-row" data-m="f">
+        <p class="m-name">Fat <span class="m-unit" id="m-f-target">0 g</span></p>
+        <p class="m-val" id="m-f">0 g</p>
+        <div class="m-bar"><i id="m-f-bar" style="width:0%"></i></div>
+      </div>
+      <div class="rule-4"></div>
+      <p class="panel-foot"><span id="remain-txt">—</span></p>
+    </div>
+
+    <div id="meals"></div>
+    <div class="spacer"></div>
+  </section>
+
+  <!-- ─── WEIGHT ─── -->
+  <section id="view-weight" class="view hidden">
+    <header class="topbar"><div><p class="eyebrow">Trend</p><h2 class="date-title">Weight</h2></div></header>
+
+    <div class="card">
+      <div class="wt-head">
+        <div><p class="stat-num" id="wt-latest">—</p><p class="stat-cap">latest</p></div>
+        <div><p class="stat-num" id="wt-avg">—</p><p class="stat-cap">7-day average</p></div>
+        <div><p class="stat-num" id="wt-delta">—</p><p class="stat-cap">per week</p></div>
+      </div>
+      <div id="wt-chart" class="chart"></div>
+      <p class="fine" id="wt-hint">Weigh in at the same time of day. The line is what matters, not any single dot.</p>
+    </div>
+
+    <div class="card">
+      <p class="field-label">Log a weight</p>
+      <div class="row-inline">
+        <input id="wt-date" type="date">
+        <input id="wt-kg" type="number" inputmode="decimal" step="0.1" placeholder="kg">
+        <button id="wt-add" class="primary">Save</button>
+      </div>
+    </div>
+
+    <div class="card" id="wt-list-card">
+      <p class="field-label">History</p>
+      <div id="wt-list"></div>
+    </div>
+    <div class="spacer"></div>
+  </section>
+
+  <!-- ─── SETTINGS ─── -->
+  <section id="view-more" class="view hidden">
+    <header class="topbar"><div><p class="eyebrow">Setup</p><h2 class="date-title">Settings</h2></div></header>
+
+    <div class="card">
+      <p class="field-label">Daily targets</p>
+      <div class="field-grid four">
+        <label class="field"><span>Calories</span><input id="t-kcal" type="number" inputmode="numeric"></label>
+        <label class="field"><span>Protein g</span><input id="t-p" type="number" inputmode="numeric"></label>
+        <label class="field"><span>Carbs g</span><input id="t-c" type="number" inputmode="numeric"></label>
+        <label class="field"><span>Fat g</span><input id="t-f" type="number" inputmode="numeric"></label>
+      </div>
+      <div class="row-inline">
+        <button id="t-save" class="primary">Save targets</button>
+        <button id="t-recalc" class="ghost">Recalculate from my stats</button>
+      </div>
+      <p class="fine" id="t-explain"></p>
+    </div>
+
+    <div class="card">
+      <p class="field-label">Your stats</p>
+      <div class="field-grid four">
+        <label class="field"><span>Age</span><input id="p-age" type="number" inputmode="numeric"></label>
+        <label class="field"><span>Height cm</span><input id="p-height" type="number" inputmode="decimal"></label>
+        <label class="field"><span>Weight kg</span><input id="p-weight" type="number" inputmode="decimal" step="0.1"></label>
+        <label class="field"><span>Sex</span>
+          <select id="p-sex"><option value="f">Female</option><option value="m">Male</option></select>
+        </label>
+      </div>
+      <div class="field-grid">
+        <label class="field"><span>Activity</span>
+          <select id="p-activity">
+            <option value="1.2">Desk job</option><option value="1.375">Light</option>
+            <option value="1.55">Moderate</option><option value="1.725">Hard</option><option value="1.9">Athlete</option>
+          </select>
+        </label>
+        <label class="field"><span>Goal</span>
+          <select id="p-goal">
+            <option value="-500">Lose — steady</option><option value="-250">Lose — gentle</option>
+            <option value="0">Maintain</option><option value="250">Build</option>
+          </select>
+        </label>
+      </div>
+      <button id="p-save" class="primary">Save stats</button>
+    </div>
+
+    <div class="card">
+      <p class="field-label">Photo scanning</p>
+      <p class="fine">Reading a plate from a photo needs a vision model. This site has no server, so it uses <em>your</em> key, kept in this browser only — never in the repository. Roughly a cent or two per photo.</p>
+      <div class="field-grid">
+        <label class="field"><span>Provider</span>
+          <select id="ai-provider"><option value="anthropic">Anthropic</option><option value="openai">OpenAI</option></select>
+        </label>
+        <label class="field"><span>Model</span><input id="ai-model" type="text" placeholder="claude-sonnet-5"></label>
+      </div>
+      <label class="field"><span>API key</span><input id="ai-key" type="password" placeholder="sk-…" autocomplete="off"></label>
+      <button id="ai-save" class="primary">Save key</button>
+      <p class="fine" id="ai-status"></p>
+    </div>
+
+    <div class="card">
+      <p class="field-label">Your meal plan</p>
+      <p class="fine">Loads every ingredient from your three-week plan into your foods, and each meal as a one-tap entry. Anything you've already edited stays as you left it.</p>
+      <div class="row-inline wrap">
+        <button id="plan-load" class="primary">Load plan</button>
+        <button id="plan-reset" class="ghost">Reset plan items to original</button>
+      </div>
+      <p class="fine" id="plan-status"></p>
+    </div>
+
+    <div class="card hidden" id="saved-card">
+      <p class="field-label">Saved meals <em>— tap one to edit</em></p>
+      <div id="saved-manage"></div>
+    </div>
+
+    <div class="card hidden" id="myfoods-card">
+      <p class="field-label">My foods <em>— tap one to edit</em></p>
+      <input id="mf-filter" type="search" placeholder="Filter…" autocomplete="off">
+      <div id="myfoods-list"></div>
+    </div>
+
+    <div class="card">
+      <p class="field-label">Your data</p>
+      <div class="row-inline wrap">
+        <button id="d-export" class="ghost">Export backup</button>
+        <button id="d-import" class="ghost">Import backup</button>
+        <button id="d-csv" class="ghost">Export CSV</button>
+        <button id="d-reset" class="ghost danger">Erase everything</button>
+      </div>
+      <input id="d-file" type="file" accept="application/json" hidden>
+      <p class="fine" id="d-status">Nothing leaves this device. Back up now and then — clearing your browser data clears your log.</p>
+    </div>
+    <div class="spacer"></div>
+  </section>
+
+  <!-- ─── BOTTOM NAV ─── -->
+  <nav class="tabs">
+    <button data-view="today" class="on"><span>Today</span></button>
+    <button id="tab-add" class="add" aria-label="Add food">+</button>
+    <button data-view="weight"><span>Weight</span></button>
+    <button data-view="more"><span>Settings</span></button>
+  </nav>
+</div>
+
+<!-- ══════════════════ ADD SHEET ══════════════════ -->
+<div id="sheet" class="sheet hidden">
+  <div class="sheet-scrim" data-close></div>
+  <div class="sheet-body">
+    <div class="sheet-grip"></div>
+    <div class="sheet-head">
+      <p class="eyebrow">Add to</p>
+      <div class="seg" id="meal-pick">
+        <button type="button" data-v="Breakfast" class="on">Breakfast</button>
+        <button type="button" data-v="Lunch">Lunch</button>
+        <button type="button" data-v="Dinner">Dinner</button>
+        <button type="button" data-v="Snack">Snack</button>
+      </div>
+    </div>
+
+    <div class="seg tabs-seg" id="add-mode">
+      <button type="button" data-v="search" class="on">Search</button>
+      <button type="button" data-v="barcode">Barcode</button>
+      <button type="button" data-v="photo">Photo</button>
+      <button type="button" data-v="manual">Manual</button>
+    </div>
+
+    <!-- search -->
+    <div class="mode" id="mode-search">
+      <input id="q" type="search" placeholder="chicken breast, dal, yaourt…" autocomplete="off">
+      <div id="saved-strip"></div>
+      <div id="results"></div>
+    </div>
+
+    <!-- barcode -->
+    <div class="mode hidden" id="mode-barcode">
+      <div id="scan-wrap" class="scan-wrap hidden"><video id="scan-video" playsinline muted></video><div class="scan-line"></div></div>
+      <button id="scan-start" class="primary big">Open camera</button>
+      <p class="fine">Or type the number under the barcode:</p>
+      <div class="row-inline">
+        <input id="bc-manual" type="text" inputmode="numeric" placeholder="3017620422003">
+        <button id="bc-go" class="primary">Look up</button>
+      </div>
+      <p class="fine" id="bc-status">Packaged food comes from Open Food Facts — free, open, no account.</p>
+      <div id="bc-result"></div>
+    </div>
+
+    <!-- photo -->
+    <div class="mode hidden" id="mode-photo">
+      <label class="dropzone" for="ph-file">
+        <span class="dz-mark">▣</span>
+        <span class="dz-text">Photograph the plate</span>
+        <span class="fine">Include a fork, hand or glass for scale — the estimate gets much better.</span>
+      </label>
+      <input id="ph-file" type="file" accept="image/*" capture="environment" hidden>
+      <img id="ph-preview" class="preview hidden" alt="Your photo">
+      <input id="ph-note" type="text" placeholder="Anything it can't see? e.g. cooked in 1 tbsp ghee" class="hidden">
+      <button id="ph-go" class="primary big hidden">Estimate this plate</button>
+      <p class="fine" id="ph-status"></p>
+      <div id="ph-result"></div>
+    </div>
+
+    <!-- manual -->
+    <div class="mode hidden" id="mode-manual">
+      <label class="field"><span>What is it</span><input id="mn-name" type="text" placeholder="Mum's rajma"></label>
+      <div class="field-grid four">
+        <label class="field"><span>Calories</span><input id="mn-k" type="number" inputmode="decimal"></label>
+        <label class="field"><span>Protein g</span><input id="mn-p" type="number" inputmode="decimal"></label>
+        <label class="field"><span>Carbs g</span><input id="mn-c" type="number" inputmode="decimal"></label>
+        <label class="field"><span>Fat g</span><input id="mn-f" type="number" inputmode="decimal"></label>
+      </div>
+      <p class="field-label">Those numbers are for</p>
+      <div class="seg" id="mn-basis">
+        <button type="button" data-v="100" class="on">100 g</button>
+        <button type="button" data-v="1">one portion</button>
+      </div>
+      <label class="chk"><input id="mn-keep" type="checkbox" checked><span>Keep in my foods</span></label>
+      <button id="mn-add" class="primary big">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ PORTION SHEET ══════════════════ -->
+<div id="portion" class="sheet hidden">
+  <div class="sheet-scrim" data-close-portion></div>
+  <div class="sheet-body short">
+    <div class="sheet-grip"></div>
+    <p class="eyebrow" id="po-brand">—</p>
+    <h3 class="po-name" id="po-name">—</h3>
+    <div class="row-inline">
+      <input id="po-amt" type="number" inputmode="decimal" step="any">
+      <select id="po-unit"></select>
+    </div>
+    <div class="po-strip">
+      <div><p class="po-n" id="po-k">0</p><p class="po-c">kcal</p></div>
+      <div><p class="po-n" id="po-p">0</p><p class="po-c">protein</p></div>
+      <div><p class="po-n" id="po-c">0</p><p class="po-c">carbs</p></div>
+      <div><p class="po-n" id="po-f">0</p><p class="po-c">fat</p></div>
+    </div>
+    <button id="po-add" class="primary big">Add to <span id="po-meal">meal</span></button>
+    <button id="po-del" class="ghost danger hidden">Remove from log</button>
+  </div>
+</div>
+
+<!-- ══════════════════ EDITOR SHEET ══════════════════ -->
+<div id="editor" class="sheet hidden">
+  <div class="sheet-scrim" data-close-editor></div>
+  <div class="sheet-body">
+    <div class="sheet-grip"></div>
+    <p class="eyebrow" id="ed-kind">Edit</p>
+    <h3 class="po-name" id="ed-title">—</h3>
+    <div id="ed-body"></div>
+    <button id="ed-save" class="primary big">Save changes</button>
+    <button id="ed-del" class="ghost danger" style="width:100%;margin-top:9px">Delete</button>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="./app.js"></script>
+</body>
+</html>
